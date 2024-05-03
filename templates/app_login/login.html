@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title_block %}Log In{% endblock  %}
+{% block title_block %}Войти в аккаунт - Эко-сообщество{% endblock  %}
 
 {% block body_block %}
 
 <div class="container m-auto w-50">
     <div class="card p-5">
-        <h2>Login to Account</h2>
-        <p class='lead'>Insert correct credentials to log into account</p>
+        <h2 class="mb-4">Войти</h2>
         <form method="post">
             {{form|crispy}}
             {% csrf_token %}
-            <input type="submit" class="btn btn-dark mt-3" value="Log In">
+            <input type="submit" class="btn btn-dark mt-3" value="Войти">
         </form>
         <br>
-        <p>Don't have Account? <a href="{% url 'app_login:signup' %}">Sign Up</a></p>
+        <p>Еще нет аккаунта? <a href="{% url 'app_login:signup' %}">Зарегистрироваться</a></p>
     </div>
 </div>
 

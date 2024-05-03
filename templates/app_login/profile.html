@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title_block %}{{user.username|capfirst}}'s Profile{% endblock  %}
+{% block title_block %}Профиль - Эко-сообщество{% endblock %}
 {% block body_block %}
 <div class="container m-auto">
     <div class="row">
@@ -13,15 +13,12 @@
                     src="{% static 'images/default.png' %}"
                 {% endif %}
                 alt="">
-                <a class="position-absolute m-2 bottom-0 end-0 btn btn-sm btn-outline-dark">View</a>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h4 class="card-title d-inline">
                     {% if user.first_name and user.last_name %}
                         {{user.first_name}} {{user.last_name}}
-                    {% else %}
-                        Update Names
                     {% endif %}
                     </h4>
                     <p class="card-text d-inline text-light">
@@ -34,40 +31,39 @@
                 <i class="bi bi-calendar3"></i>
                 {{user.date_joined|date}}</p>
                 <div class="input-group input-group-sm">
-                    <span class="input-group-text bg-light" ><b>Edit:</b></span>
+                    <span class="input-group-text bg-light" ><b>Изменить:</b></span>
                     <a {% if user.user_profile %}
                         href="{% url 'app_login:modify' %}"
                     {% else %}
                         href="{% url 'app_login:extra' %}"
                     {% endif %} class="btn btn-success">
-                        <i class="bi bi-pencil-square"></i> Profile</a>
+                        <i class="bi bi-pencil-square me-1"></i>Профиль</a>
                     <a class="btn btn-primary" href="{% url 'app_login:update' %}">
-                        <i class="bi bi-file-person"></i> Account</a>
+                        <i class="bi bi-file-person me-1"></i>Личное</a>
                     <a class="btn btn-danger" href="{% url 'app_login:password' %}">
-                        <i class="bi bi-shield-check"></i> Password</a>
+                        <i class="bi bi-shield-check me-1"></i>Пароль</a>
                 </div>
             </div>
         </div>
         <div class="col-md-8 bg-light p-5 border border-2 border-dark rounded-end">
-            <h5 class="display-5">{{user.username|capfirst}}'s Profile</h5>
-            <div class="card p-3 lead">{{user.user_profile.bio|default:"Add Bio"}}</div>
+            <h5 class="display-5">Профиль</h5>
+            <div class="card p-3 lead">{{user.user_profile.bio|default:"Добавьте информацию о себе"}}</div>
             <div class=" container mt-2 d-flex justify-content-between flex-wrap">
                 <p class="lead d-inline"><kbd>
                     <i class="bi bi-geo-alt-fill"></i></kbd> 
-                    {{user.user_profile.location|default:"Add Location"}}</p>
-                <p class="lead d-inline"><kbd>
-                    <i class="bi bi-check-circle-fill"></i></kbd> 
-                    {{user.last_login|date:'f A l, F j'}}</p>
+                    {{user.user_profile.location|default:"Добавьте местоположение"}}</p>
             </div>
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h5>My Blogs:</h5>
-                    <a href="{% url 'app_blog:manage' %}" class="btn btn-warning btn-sm">Manage Blogs</a>
+                    <h5>Мои посты</h5>
+                    <a href="{% url 'app_blog:manage' %}" class="btn btn-warning btn-sm">Управлять постами</a>
                 </div>
                 <div class="card-body">
                     <ul>
                     {% for blog in user.blog_author.all %}
                         <li><a class="text-decoration-none" href="{% url 'app_blog:blog' slug=blog.slug %}">{{blog.title}}</a></li>
+                        {% empty %}
+                        <li>У вас пока нет написанных постов</li>
                     {% endfor %}
                     </ul>
                 </div>

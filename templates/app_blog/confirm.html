@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title_block %}My Blog{% endblock  %}
+{% block title_block %}Мои посты{% endblock %}
 {% load static %}
 {% block body_block %}
 <div class="container">
@@ -8,8 +8,7 @@
     <div class="alert alert-warning">{{msg}}</div>
     {% endif %}
 {% else %}
-    <h4>Sorry!</h4>
-    <p>You are not allowed to use this!</p>
+    <p>Извините, но у вас нет прав к этому элементу</p>
 {% endif %}
 </div>
-{% endblock  %}
+{% endblock %}

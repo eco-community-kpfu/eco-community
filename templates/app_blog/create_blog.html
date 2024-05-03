@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title_block %}Create Blog{% endblock  %}
+{% block title_block %}Написать пост - Эко-сообщество{% endblock  %}
 
 {% block body_block %}
 <div class="container m-auto w-50">
     <div class="card p-5 mb-5">
-        <h2>Create Blog</h2>
-        <p class="text-secondary">Insert informations and publish your blog.</p>
+        <h2>Написать пост</h2>
+        <p class="text-secondary">Добавьте информацию и сохраните пост, чтобы его опубликовать.</p>
         <form method="post" enctype="multipart/form-data">
             {{form|crispy}}
             {% csrf_token %}
-            <input type="submit" class="btn btn-dark mt-3" value="Post Blog">
+            <input type="submit" class="btn btn-success mt-3" value="Сохранить">
         </form>
     </div>
 </div>

@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title_block %}Sign Up{% endblock  %}
+{% block title_block %}Регистрация - Эко-сообщество{% endblock  %}
 
 {% block body_block %}
 <div class="container m-auto w-50">
 {% if registerd %}
     <div class="alert alert-success" role="alert">
-        Registration Completed Successfully! <a href="{% url 'app_login:login' %}">Login</a>
+        Аккаунт успешно зарегистрирован! <a href="{% url 'app_login:login' %}">Войти</a>
     </div>
 {% else %}
     <div class="card p-5 mb-5">
-        <h2>Create Account</h2>
-        <p class='lead'>Insert correct credentials to create an account</p>
+        <h2>Регистрация</h2>
         <form method="post">
             {{form|crispy}}
             {% csrf_token %}
-            <input type="submit" class="btn btn-dark mt-3" value="Create Account">
+            <input type="submit" class="btn btn-dark mt-3" value="Создать аккаунт">
         </form>
         <br>
-        <p>Already have Account? <a href="{% url 'app_login:login' %}">Login</a></p>
+        <p>Уже есть аккаунт? <a class="" href="{% url 'app_login:login' %}">Войти</a></p>
     </div>
 {% endif %}
 </div>

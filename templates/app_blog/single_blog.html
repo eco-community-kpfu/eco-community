@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title_block %}{{blog.title}}{% endblock  %}
+{% block title_block %}{{blog.title}} - Эко-сообщество{% endblock  %}
 {% load crispy_forms_tags %}
 {% load static %}
 {% block body_block %}
@@ -18,8 +18,8 @@
                 </div>
                 <p class="mx-2 text-secondary">
                     <i class="bi bi-pencil-square"></i>
-                    Posted by <b>@/{{blog.author}}</b> at {{blog.published}}.
-                    Last edited at {{blog.edited}}.</p>
+                    Автор: <b>@/{{blog.author}}</b>
+                    Последнее обновление {{blog.edited}}</p>
                 <div class="post-content">
                     <h4 class="fw-bold">{{blog.title}}</h4>
                     <p class="lead">{{blog.sub_title}}</p>
@@ -30,20 +30,20 @@
                 <form method="post" class="d-flex my-3">
                     {{comment_form|crispy}}
                     {% csrf_token %}
-                    <button class="btn btn-dark me-2" type="submit"><i class="bi bi-chat-dots"></i> Comment</button>
+                    <button class="btn btn-dark me-2" type="submit"><i class="bi bi-chat-dots"></i> Комментировать</button>
                     {% if liked %}
                     <a class="btn btn-warning" href="{% url 'app_blog:dislike' pk=blog.pk %}">
-                    <i class="bi bi-hand-thumbs-down"></i> Dislike</a>
+                    <i class="bi bi-hand-thumbs-down"></i></a>
                     {% else %}
                     <a class="btn btn-primary" href="{% url 'app_blog:like' pk=blog.pk %}">
-                    <i class="bi bi-hand-thumbs-up"></i> Like</a>
+                    <i class="bi bi-hand-thumbs-up"></i></a>
                     {% endif %}
                 </form>                
                 {% else %}
                     <p class="lead">
                         <a class="text-decoration-none" href="{% url 'app_login:login' %}">
                         <i class="bi bi-person-circle"></i> 
-                        Login</a> to post a comment.
+                        Войдите</a>, чтобы написать комментарий.
                     </p>
                 {% endif %}
 
@@ -51,11 +51,11 @@
                     <div class="card-header">
                         <span>
                             <i class="bi bi-hand-thumbs-up"></i>
-                            <b>{{blog.blog_like.count}}</b> Likes and
+                            Нравится - <b>{{blog.blog_like.count}}</b>
                         </span>
                         <span class="ms-2">
                             <i class="bi bi-chat-right-quote ml-2"></i>
-                            <b>{{blog.blog_comment.count}}</b> Comments by other users:
+                            Комментариев - <b>{{blog.blog_comment.count}}</b>
                         </span>
                     </div>
                     <div class="card-body">
@@ -73,30 +73,15 @@
                                 </div>
                                 <p class="my-0">{{comment.comment}}</p>
                             </div>
+                        {% empty %}
+                        Пока к посту нет комментариев
                         {% endfor %}
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="mb-3">
-                    <h5>Tags</h5>
-                    <div class="py-3">
-                        <span class="border p-2 rounded">Design</span>
-                        <span class="border p-2 rounded">Development</span>
-                        <span class="border p-2 rounded">UI/UX</span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h5>Share</h5>
-                    <div class="py-3">
-                        <a class="btn btn-light me-2"><i class="bi bi-facebook"></i></a>
-                        <a class="btn btn-light me-2"><i class="bi bi-twitter"></i></a>
-                        <a class="btn btn-light me-2"><i class="bi bi-discord"></i></a>
-                        <a class="btn btn-light me-2"><i class="bi bi-telegram"></i></a>
-                    </div>
-                </div>
                 <div class="">
-                    <h5 class="">Categories</h5>
+                    <h5 class="">Темы поста</h5>
                     <div class="card" style="width: 18rem;">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">An item</li>

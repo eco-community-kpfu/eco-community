@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title_block %}{{user.first_name|default:"User"}}' Blogs{% endblock  %}
+{% block title_block %}Мои посты - Эко-сообщество{% endblock %}
 {% load custom_filters %}
 {% load static %}
 {% block body_block %}
 <main class="blog-grid-page">
     <div class="container">
-        <p class='lead'>{{user.first_name|default:"User"}}' Blogs</p>
+        <p class='lead'>Мои посты</p>
         <div class="row mt-2">
             {% for blog in user.blog_author.all %}
             <div class="col-md-4 mb-4">
-                <div class="card" style="height:355px">
+                <div class="card" style="height:400px">
                     <div class="overflow-hidden">
                         <a href="{% url 'app_blog:blog' slug=blog.slug %}">
                         <img class="img-fluid"
@@ -20,7 +20,7 @@
                             {% endif %} 
                         alt=""></a>
                     </div>
-                    <div class="px-3 py-1">
+                    <div class="px-3 py-3">
                         <p class="d-flex justify-content-between mb-1 text-secondary">
                             <span><i class="bi bi-calendar3"></i> {{blog.published|date}}</span>
                             <span><i class="bi bi-person-circle"></i> {{blog.author}}</span>
@@ -28,12 +28,14 @@
                         <h5>{{blog.title|value_range:60}}</h5>
                         <p class="mb-0">{{blog.content|value_range:85}}</p>
                     </div>
-                    <div class="card-footer d-flex justify-content-between">
-                        <a href="{% url 'app_blog:update' pk=blog.pk %}" class="btn btn-warning">Edit Blog Content</a>
-                        <a href="{% url 'app_blog:delete' pk=blog.pk %}" class="btn btn-danger">Delete Blog</a>
+                    <div class="card-footer d-flex justify-content-between py-4">
+                        <a href="{% url 'app_blog:update' pk=blog.pk %}" class="btn btn-warning">Редактировать</a>
+                        <a href="{% url 'app_blog:delete' pk=blog.pk %}" class="btn btn-danger">Удалить</a>
                     </div>
                 </div>
             </div>
+            {% empty %}
+            У вас пока нет написанных постов
             {% endfor %}
         </div>
     </div>
