@@ -80,15 +80,15 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="">
+                <div class="ms-5">
                     <h5 class="">Темы поста</h5>
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
+                            {% for topic in blog.topics.all %}
+                            <li class="list-group-item">{{ topic.title }}</li>
+                            {% empty %}
+                            <li class="list-group-item">Темы не выбраны</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>

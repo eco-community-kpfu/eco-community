@@ -12,13 +12,11 @@
                 <div class="card" style="height:400px">
                     <div class="overflow-hidden">
                         <a href="{% url 'app_blog:blog' slug=blog.slug %}">
-                        <img class="img-fluid"
-                            {% if blog.blog_image == "" %}
-                                src="{% static '/images/empty.jpg' %}"
+                            {% if blog.image %}
+                            <img class="img-fluid" src="/media/{{blog.image}}" alt=""></a>
                             {% else %}
-                                src="/media/{{blog.image}}"
-                            {% endif %} 
-                        alt=""></a>
+                            <img class="img-fluid" src="{% static '/images/empty.jpg' %}" alt=""></a>
+                            {% endif %}
                     </div>
                     <div class="px-3 py-3">
                         <p class="d-flex justify-content-between mb-1 text-secondary">
@@ -30,12 +28,15 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between py-4">
                         <a href="{% url 'app_blog:update' pk=blog.pk %}" class="btn btn-warning">Редактировать</a>
-                        <a href="{% url 'app_blog:delete' pk=blog.pk %}" class="btn btn-danger">Удалить</a>
+                        <form action="{% url 'app_blog:delete' pk=blog.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
                     </div>
                 </div>
             </div>
             {% empty %}
-            У вас пока нет написанных постов
+            <p>У вас пока нет написанных постов</p>
             {% endfor %}
         </div>
     </div>

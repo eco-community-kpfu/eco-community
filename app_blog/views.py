@@ -2,18 +2,18 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DeleteView
 from django.views.generic.base import TemplateView
 from app_blog.models import Blog, Like
 from uuid import uuid4
-from app_blog.forms import CommentForm
+from app_blog.forms import CommentForm, BlogForm
 from slugify import slugify
 
 
 class CreateBlog(LoginRequiredMixin, CreateView):
     model = Blog
     template_name = 'app_blog/create_blog.html'
-    fields = ('title', 'sub_title', 'content', 'image')
+    form_class = BlogForm
 
     def form_valid(self, form):
         blog_obj = form.save(commit=False)
@@ -21,15 +21,28 @@ class CreateBlog(LoginRequiredMixin, CreateView):
         blog_obj.image = self.request.FILES['image']
         blog_obj.slug = slugify(blog_obj.title) + '-' + str(uuid4())
         blog_obj.save()
+        form.save_m2m()
         return HttpResponseRedirect(reverse('app_blog:blogs'))
 
 
 class UpdateBlog(LoginRequiredMixin, UpdateView):
     model = Blog
     template_name = 'app_blog/edit_blog.html'
-    fields = ('title', 'sub_title', 'content', 'image')
+    form_class = BlogForm
 
-    def get_success_url(self, **kwargs):
+    def get_queryset(self):
+        return self.model.objects.filter(author=self.request.user)
+
+    def form_valid(self, form):
+        blog_obj = form.save(commit=False)
+        blog_obj.author = self.request.user
+        blog_obj.image = self.request.FILES.get('image', blog_obj.image)
+        blog_obj.slug = slugify(blog_obj.title) + '-' + str(uuid4())
+        blog_obj.save()
+        form.save_m2m()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
         return reverse_lazy('app_blog:blog', kwargs={'slug': self.object.slug})
 
 
@@ -41,7 +54,6 @@ class BlogList(ListView):
     context_object_name = 'blogs'
     model = Blog
     template_name = 'app_blog/all_blogs.html'
-    # queryset = Blog.objects.order_by('-published')
 
 
 def single_blog(request, slug):
@@ -94,3 +106,14 @@ def delete_blog(request, pk):
             msg = 'Success'
     context = {'msg': msg}
     return render(request, 'app_blog/confirm.html', context)
+
+
+class DeleteBlogView(LoginRequiredMixin, DeleteView):
+    model = Blog
+    template_name = 'app_blog/my_blogs.html'
+    success_url = reverse_lazy('app_blog:manage')
+
+    def get_queryset(self):
+        return Blog.objects.filter(author=self.request.user)
+
+

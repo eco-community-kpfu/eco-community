@@ -22,7 +22,7 @@ class Blog(models.Model):
     image = models.ImageField(upload_to='blogs', verbose_name='фотография')
     published = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
-    topics = models.ManyToManyField(EcologicalTopic, related_name="blogs")
+    topics = models.ManyToManyField(EcologicalTopic, related_name="blogs", verbose_name="экологические темы")
 
     class Meta:
         ordering = ['-published', ]
