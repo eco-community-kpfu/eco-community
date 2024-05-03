@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_author')
-    title = models.CharField(max_length=150, verbose_name='Insert Title')
-    sub_title = models.CharField(max_length=264, verbose_name='Insert Sub-title', default='')
+    title = models.CharField(max_length=150, verbose_name='заголовок')
+    sub_title = models.CharField(max_length=264, verbose_name='подзаголовок', null=True, blank=True)
     slug = models.SlugField(max_length=264, unique=True)
-    content = models.TextField(verbose_name='Blog Content')
-    image = models.ImageField(upload_to='blogs', verbose_name='Image')
+    content = models.TextField(verbose_name='текст')
+    image = models.ImageField(upload_to='blogs', verbose_name='фотография')
     published = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
 
@@ -22,7 +22,7 @@ class Blog(models.Model):
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blog_comment')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_comment')
-    comment = models.TextField(verbose_name='Blog Comment', default='')
+    comment = models.TextField(verbose_name='комментарий', default='')
     commented = models.DateTimeField(auto_now_add=True)
 
     class Meta:

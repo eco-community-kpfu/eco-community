@@ -14,7 +14,7 @@
         <form method="post">
             {{form|crispy}}
             {% csrf_token %}
-            <input type="submit" class="btn btn-dark mt-3" value="Создать аккаунт">
+            <input type="submit" class="btn btn-success mt-3" value="Создать аккаунт">
         </form>
         <br>
         <p>Уже есть аккаунт? <a class="" href="{% url 'app_login:login' %}">Войти</a></p>

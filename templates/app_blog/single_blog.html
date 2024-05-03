@@ -32,10 +32,10 @@
                     {% csrf_token %}
                     <button class="btn btn-dark me-2" type="submit"><i class="bi bi-chat-dots"></i> Комментировать</button>
                     {% if liked %}
-                    <a class="btn btn-warning" href="{% url 'app_blog:dislike' pk=blog.pk %}">
+                    <a class="btn btn-outline-danger" href="{% url 'app_blog:dislike' pk=blog.pk %}">
                     <i class="bi bi-hand-thumbs-down"></i></a>
                     {% else %}
-                    <a class="btn btn-primary" href="{% url 'app_blog:like' pk=blog.pk %}">
+                    <a class="btn btn-outline-success" href="{% url 'app_blog:like' pk=blog.pk %}">
                     <i class="bi bi-hand-thumbs-up"></i></a>
                     {% endif %}
                 </form>                

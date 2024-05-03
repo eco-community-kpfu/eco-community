@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title_block %}{{action}} Profile{% endblock  %}
+{% block title_block %}Добавить информацию о себе - Эко-сообщество{% endblock %}
 {% block body_block %}
 <div class="container m-auto w-50">
     <div class="card p-5">
@@ -9,8 +9,8 @@
         <form method="post" enctype="multipart/form-data">
             {{form|crispy}}
             {% csrf_token %}
-            <input type="submit" class="btn btn-dark mt-3" value="Добавить">
-            <a class="btn btn-info mt-3" href="{% url 'app_login:profile' %}">Отменить</a>
+            <input type="submit" class="btn btn-success mt-3 me-4" value="Добавить">
+            <a class="btn btn-outline-danger mt-3" href="{% url 'app_login:profile' %}">Отменить</a>
         </form>
     </div>
 </div>
