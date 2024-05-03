@@ -96,18 +96,6 @@ def dislike_blog(request, pk):
     return HttpResponseRedirect(reverse('app_blog:blog', kwargs={'slug': blog.slug}))
 
 
-@login_required
-def delete_blog(request, pk):
-    blog = Blog.objects.get(pk=pk)
-    msg = 'Failed'
-    if blog.author:
-        if request.user == blog.author:
-            blog.delete()
-            msg = 'Success'
-    context = {'msg': msg}
-    return render(request, 'app_blog/confirm.html', context)
-
-
 class DeleteBlogView(LoginRequiredMixin, DeleteView):
     model = Blog
     template_name = 'app_blog/my_blogs.html'
