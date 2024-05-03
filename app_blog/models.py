@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class EcologicalTopic(models.Model):
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "экологическая тема"
+        verbose_name_plural = "экологические темы"
+
+
 class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_author')
     title = models.CharField(max_length=150, verbose_name='заголовок')
@@ -11,6 +22,7 @@ class Blog(models.Model):
     image = models.ImageField(upload_to='blogs', verbose_name='фотография')
     published = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
+    topics = models.ManyToManyField(EcologicalTopic, related_name="blogs")
 
     class Meta:
         ordering = ['-published', ]
