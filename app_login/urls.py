@@ -1,5 +1,5 @@
 from django.urls import path
-from views import signup, login, logout, profile, profile_update, profile_extra, profile_extra_update, password_change
+from app_login.views import signup, login, logout, profile, profile_update, profile_extra, profile_extra_update, password_change
 
 app_name = 'app_login'
 
