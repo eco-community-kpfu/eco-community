@@ -24,7 +24,7 @@
                             <span><i class="bi bi-person-circle"></i> {{blog.author}}</span>
                         </p>
                         <h5>{{blog.title|value_range:60}}</h5>
-                        <p class="mb-0">{{blog.content|value_range:85}}</p>
+                        <p class="mb-0">{{blog.text|value_range:85}}</p>
                     </div>
                     <div class="card-footer d-flex justify-content-between py-4">
                         <a href="{% url 'app_blog:update' pk=blog.pk %}" class="btn btn-warning">Редактировать</a>
