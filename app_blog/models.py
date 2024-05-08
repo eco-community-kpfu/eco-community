@@ -14,11 +14,10 @@ class EcologicalTopic(models.Model):
 
 
 class Blog(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_author')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_author')
     title = models.CharField(max_length=150, verbose_name='заголовок')
-    sub_title = models.CharField(max_length=264, verbose_name='подзаголовок', null=True, blank=True)
     slug = models.SlugField(max_length=264, unique=True)
-    content = models.TextField(verbose_name='текст')
+    text = models.TextField(verbose_name='текст')
     image = models.ImageField(upload_to='blogs', verbose_name='фотография')
     published = models.DateTimeField(auto_now_add=True)
     edited = models.DateTimeField(auto_now=True)
