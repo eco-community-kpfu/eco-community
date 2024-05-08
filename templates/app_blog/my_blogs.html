@@ -13,15 +13,15 @@
                     <div class="overflow-hidden">
                         <a href="{% url 'app_blog:blog' slug=blog.slug %}">
                             {% if blog.image %}
-                            <img class="img-fluid" src="/media/{{blog.image}}" alt=""></a>
+                            <img class="img-fluid w-100" src="/media/{{blog.image}}" alt=""></a>
                             {% else %}
-                            <img class="img-fluid" src="{% static '/images/empty.jpg' %}" alt=""></a>
+                            <img class="img-fluid w-100" src="{% static '/images/empty.jpg' %}" alt=""></a>
                             {% endif %}
                     </div>
                     <div class="px-3 py-3">
                         <p class="d-flex justify-content-between mb-1 text-secondary">
                             <span><i class="bi bi-calendar3"></i> {{blog.published|date}}</span>
-                            <span><i class="bi bi-person-circle"></i> {{blog.author}}</span>
+                            <span><i class="bi bi-person-circle"></i> {{blog.user}}</span>
                         </p>
                         <h5>{{blog.title|value_range:60}}</h5>
                         <p class="mb-0">{{blog.text|value_range:85}}</p>

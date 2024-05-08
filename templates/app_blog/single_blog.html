@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row mt-2">
             <div class="col-md-8">
-                <div class="mb-1 overflow-hidden rounded border" style="max-height:300px">
+                <div class="mb-1 overflow-hidden rounded border">
                     <img class="img-fluid align-middle w-100"
                             {% if blog.blog_image == "" %}
                                 src="{% static '/images/empty.jpg' %}"
@@ -18,7 +18,7 @@
                 </div>
                 <p class="mx-2 text-secondary">
                     <i class="bi bi-pencil-square"></i>
-                    Автор: <b>@/{{blog.author}}</b>
+                    Автор: <b>@/{{blog.user}}</b>
                     Последнее обновление {{blog.edited}}</p>
                 <div class="post-content">
                     <h4 class="fw-bold">{{blog.title}}</h4>

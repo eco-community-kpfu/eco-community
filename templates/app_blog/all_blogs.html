@@ -12,7 +12,7 @@
                 <div class="card" style="height:400px">
                     <div class="overflow-hidden" style="height:200px">
                         <a href="{% url 'app_blog:blog' slug=blog.slug %}" class="text-dark text-decoration-none">
-                        <img class="img-fluid"
+                        <img class="img-fluid w-100"
                             {% if blog.blog_image == "" %}
                                 src="{% static '/images/empty.jpg' %}"
                             {% else %}
@@ -23,7 +23,7 @@
                     <div class="px-3 py-1">
                         <p class="d-flex justify-content-between mb-1 text-secondary">
                             <span><i class="bi bi-calendar3 me-2"></i>{{blog.published|date}}</span>
-                            <span><i class="bi bi-person-circle me-2"></i>{{blog.author}}</span>
+                            <span><i class="bi bi-person-circle me-2"></i>{{blog.user}}</span>
                         </p>
                         <h5>{{blog.title|value_range:60}}</h5>
                         <p class="mb-0">{{blog.text|value_range:85}}</p>
