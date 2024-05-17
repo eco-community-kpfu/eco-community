@@ -13,20 +13,21 @@
                                 src="{% static '/images/empty.jpg' %}"
                             {% else %}
                                 src="/media/{{blog.image}}"
-                            {% endif %} 
+                            {% endif %}
                         alt="">
                 </div>
                 <p class="mx-2 text-secondary">
-                    <i class="bi bi-pencil-square"></i>
-                    Автор: <b>@/{{blog.user}}</b>
-                    Последнее обновление {{blog.edited}}</p>
+                <i class="bi bi-pencil-square"></i>
+                Автор: <b>@/{{blog.user}}</b>
+                <span class="mx-2"></span>Последнее обновление {{blog.edited}}
+                </p>
                 <div class="post-content">
                     <h4 class="fw-bold">{{blog.title}}</h4>
                     <p class="lead">{{blog.sub_title}}</p>
                     <p style="text-align:justify">{{blog.text|linebreaks}}</p>
                 </div>
-                
-                {% if user.is_authenticated %}   
+
+                {% if user.is_authenticated %}
                 <form method="post" class="d-flex my-3">
                     {{comment_form|crispy}}
                     {% csrf_token %}
@@ -38,11 +39,11 @@
                     <a class="btn btn-outline-success" href="{% url 'app_blog:like' pk=blog.pk %}">
                     <i class="bi bi-hand-thumbs-up"></i></a>
                     {% endif %}
-                </form>                
+                </form>
                 {% else %}
                     <p class="lead">
                         <a class="text-decoration-none" href="{% url 'app_login:login' %}">
-                        <i class="bi bi-person-circle"></i> 
+                        <i class="bi bi-person-circle"></i>
                         Войдите</a>, чтобы написать комментарий.
                     </p>
                 {% endif %}
